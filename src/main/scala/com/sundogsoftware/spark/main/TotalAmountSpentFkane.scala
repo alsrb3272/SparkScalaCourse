@@ -1,4 +1,4 @@
-package com.sundogsoftware.spark
+package com.sundogsoftware.spark.main
 
 object TotalAmountSpentFkane {
 

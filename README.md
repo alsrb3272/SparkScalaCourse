@@ -6,7 +6,13 @@ Learning Spark (개인 Study)
 ### 🔹 RDD
 - RDD는 Resilient Distributed Dataset 의 줄임말로 스파크의 기본 데이터 구조이다. 
 - 분산 변경 불가능한 객체 모음이며 스파크의 모든 작업은 새로운 RDD를 만들거나 존재하는 RDD를 변형하거나 결과 계산을 위해 RDD에서 연산하는 것을 표현하고 있다. 
-- 스파크는 빠른 map reduce 작업을 RDD 개념을 이용해 사용한다고 한다. 
+- 스파크는 빠른 map reduce 작업을 RDD 개념을 이용해 사용한다고 한다.
+
+- Operation
+  - Transformation
+    기존의 RDD 를 변경하여 새로운 RDD 를 생성하는 것입니다. 즉, 리턴값이 RDD 입니다. map, filter 등을 예로 들 수 있습니다.
+  - Action 
+    - RDD 값을 기반으로 무엇인가를 계산해서, 결과를 생성하는 것입니다. 즉, 리턴값이 데이터 또는 실행 결과입니다. collect, count 등을 예로 들 수 있습니다
 
 ### 🔹 Spark map reduce vs Hadoop map reduce 차이
 - 데이터를 메모리 vs 디스크 

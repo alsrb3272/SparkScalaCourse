@@ -25,7 +25,11 @@ object MaxTemperatures {
     
     val lines = sc.textFile("data/1800.csv")
     val parsedLines = lines.map(parseLine)
+
+    // boolean값을 반환하는 기능을 제공
+    // 만약 파싱된 줄에서 다음 값과 비교하여 TMAX값을 가지고 있지않는다면 지워지는 방식으로 필터링 된 결과값
     val maxTemps = parsedLines.filter(x => x._2 == "TMAX")
+
     val stationTemps = maxTemps.map(x => (x._1, x._3.toFloat))
     val maxTempsByStation = stationTemps.reduceByKey( (x,y) => max(x,y))
     val results = maxTempsByStation.collect()
