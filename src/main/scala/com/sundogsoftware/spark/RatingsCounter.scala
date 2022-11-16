@@ -1,4 +1,5 @@
 // IMPORT WHAT WE NEED
+// 등급 히스토그램의 예시
 package com.sundogsoftware.spark
 
 
@@ -24,7 +25,7 @@ object RatingsCounter {
 
     // LOAD THE DATA
     // Load up each line of the ratings data into an RDD
-    // 데이터 파일을 텍스트 파일로 RDD라인을 호출
+    // 데이터 파일을 텍스트 파일로 RDD라인을 호출, 각 개별의 레이팅으로 표시
     val lines = sc.textFile("data/ml-100k/u.data")
 
     // EXTRACT(MAP) THE DATA WE CARE ABOUT
