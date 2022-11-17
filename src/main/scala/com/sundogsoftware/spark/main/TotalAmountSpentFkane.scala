@@ -1,5 +1,9 @@
 package com.sundogsoftware.spark.main
 
+
+// 코딩테스트 연습문제 - 1
+// 고객별 주문한 금액의 합 구하기
+
 object TotalAmountSpentFkane {
 
   // Split each comma-delimited line into fields

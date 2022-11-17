@@ -3,7 +3,7 @@ package com.sundogsoftware.spark.main
 import org.apache.spark._
 import org.apache.log4j._
 
-
+// 내가 생각한 해결방안
 object TotalAmountSpentMink {
   // 고객별 주문한 금액의 합 구하기
 
@@ -16,7 +16,9 @@ object TotalAmountSpentMink {
 
   def amountSpentMink(line:String):(Int, Float) = {
     val fields = line.split(",")
-    (fields(0).toInt, fields(2).toFloat)
+    val customerID = fields(0).toInt
+    val dollar_total = fields(2).toFloat
+    (customerID, dollar_total)
   }
 
   def main(args: Array[String]){
