@@ -1,8 +1,4 @@
-package com.sundogsoftware.spark
-
-import org.apache.log4j._
-import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.functions._
+package com.sundogsoftware.spark.Section3
 
 /** Count up how many of each word appears in a book as simply as possible. */
 object WordCountDataset {
@@ -11,7 +7,7 @@ object WordCountDataset {
 
   /** Our main function where the action happens */
   def main(args: Array[String]) {
-   
+
     // Set the log level to only print errors
     Logger.getLogger("org").setLevel(Level.ERROR)
 
@@ -24,7 +20,6 @@ object WordCountDataset {
       .getOrCreate()
 
     // Read each line of my book into an Dataset
-    import spark.implicits._
     val input = spark.read.text("data/book.txt").as[Book]
 
     // Split into words separated by a space character
@@ -39,4 +34,3 @@ object WordCountDataset {
     wordCounts.show(wordCounts.count.toInt)
   }
 }
-

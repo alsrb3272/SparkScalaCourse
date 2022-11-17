@@ -1,34 +1,30 @@
-package com.sundogsoftware.spark
-
-import org.apache.spark._
-import org.apache.log4j._
+package com.sundogsoftware.spark.Section3
 
 /** Count up how many of each word appears in a book as simply as possible. */
 object WordCount {
- 
+
   /** Our main function where the action happens */
   def main(args: Array[String]) {
-   
+
     // Set the log level to only print errors
     Logger.getLogger("org").setLevel(Level.ERROR)
-    
-     // Create a SparkContext using every core of the local machine
-    val sc = new SparkContext("local[*]", "WordCount")   
-    
+
+    // Create a SparkContext using every core of the local machine
+    val sc = new SparkContext("local[*]", "WordCount")
+
     // Read each line of my book into an RDD
     val input = sc.textFile("data/book.txt")
-    
+
     // Split into words separated by a space character
     // flatmap으로 띄어쓰기가 되어 있는 단어들을 RDD로 생성
     val words = input.flatMap(x => x.split(" "))
-    
+
     // Count up the occurrences of each word
     // 개수카운트
     val wordCounts = words.countByValue()
-    
+
     // Print the results.
     wordCounts.foreach(println)
   }
-  
-}
 
+}

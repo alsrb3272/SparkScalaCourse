@@ -1,20 +1,15 @@
-// IMPORT WHAT WE NEED
-// 등급 히스토그램의 예시
-package com.sundogsoftware.spark
+package com.sundogsoftware.spark.Section3
 
-
-// 스파크 함수 호출
-// log4j를 이용하여 오류 수준과 로깅을 조정
-import org.apache.spark._
-import org.apache.log4j._
+import org.apache.log4j.{Level, Logger}
+import org.apache.spark.SparkContext
 
 /** Count up how many of each star rating exists in the MovieLens 100K data set. */
 
 object RatingsCounter {
- 
+
   /** Our main function where the action happens */
   def main(args: Array[String]) {
-   
+
     // Set the log level to only print errors
     Logger.getLogger("org").setLevel(Level.ERROR)
 
@@ -45,7 +40,7 @@ object RatingsCounter {
     // Sort the resulting map of (rating, count) tuples
     // sequence데이터 구조로 설정 후 정렬해서 별점을 받은 레이팅의 갯수를 정렬.
     val sortedResults = results.toSeq.sortBy(_._1)
-    
+
     // Print each result on its own line.
     // 각각의 구조로 출력
     sortedResults.foreach(println)

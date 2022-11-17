@@ -1,8 +1,8 @@
-package com.sundogsoftware.spark
+package com.sundogsoftware.spark.Section3
 
-import org.apache.log4j._
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.functions._
+import org.apache.spark.sql.functions.{explode, lower, split}
 
 /** Count up how many of each word occurs in a book, using regular expressions and sorting the final results */
 object WordCountBetterSortedDataset {
@@ -56,4 +56,3 @@ object WordCountBetterSortedDataset {
 
   }
 }
-
