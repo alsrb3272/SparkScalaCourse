@@ -1,7 +1,9 @@
 package com.sundogsoftware.spark.Section3
 
 /** Find the minimum temperature by weather station */
-
+import breeze.linalg.min
+import org.apache.log4j._
+import org.apache.spark._
 
 object MinTemperatures {
 

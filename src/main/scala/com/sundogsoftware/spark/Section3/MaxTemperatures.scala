@@ -1,5 +1,9 @@
 package com.sundogsoftware.spark.Section3
 
+import breeze.linalg.max
+import org.apache.log4j._
+import org.apache.spark._
+
 /** Find the maximum temperature by weather station for a year */
 object MaxTemperatures {
 

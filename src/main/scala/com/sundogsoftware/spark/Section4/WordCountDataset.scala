@@ -1,4 +1,4 @@
-package com.sundogsoftware.spark.Section3
+package com.sundogsoftware.spark.Section4
 
 /** Count up how many of each word appears in a book as simply as possible. */
 object WordCountDataset {

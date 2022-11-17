@@ -1,7 +1,9 @@
-package com.sundogsoftware.spark.Section3
+package com.sundogsoftware.spark.Section4
+
+import org.apache.spark.sql.functions.{round, sum}
 
 /** Compute the total amount spent per customer in some fake e-commerce data. */
-object TotalSpentByCustomerDataset {
+object TotalSpentByCustomerSortedDataset {
 
   case class CustomerOrders(cust_id: Int, item_id: Int, amount_spent: Double)
 
@@ -11,18 +13,20 @@ object TotalSpentByCustomerDataset {
     // Set the log level to only print errors
     Logger.getLogger("org").setLevel(Level.ERROR)
 
-    // Create a SparkSession using every core of the local machine
     val spark = SparkSession
       .builder
       .appName("TotalSpentByCustomer")
       .master("local[*]")
-      .config("spark.sql.warehouse.dir", "file:///C:/temp") // Necessary to work around a Windows bug in Spark 2.0.0; omit if you're not on Windows.
       .getOrCreate()
 
+    // Create schema when reading customer-orders
     val customerOrdersSchema = new StructType()
       .add("cust_id", IntegerType, nullable = true)
       .add("item_id", IntegerType, nullable = true)
       .add("amount_spent", DoubleType, nullable = true)
+
+    // Load up the data into spark dataset
+    // Use default separator (,), load schema from customerOrdersSchema and force case class to read it as dataset
     val customerDS = spark.read
       .schema(customerOrdersSchema)
       .csv("data/customer-orders.csv")
@@ -33,6 +37,9 @@ object TotalSpentByCustomerDataset {
       .agg(round(sum("amount_spent"), 2)
         .alias("total_spent"))
 
-    totalByCustomer.show(totalByCustomer.count.toInt)
+    val totalByCustomerSorted = totalByCustomer.sort("total_spent")
+
+    totalByCustomerSorted.show(totalByCustomer.count.toInt)
   }
+
 }

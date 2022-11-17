@@ -1,5 +1,6 @@
 package com.sundogsoftware.spark.Section3
-
+import org.apache.log4j._
+import org.apache.spark._
 /** Count up how many of each word occurs in a book, using regular expressions and sorting the final results */
 object WordCountBetterSorted {
 
