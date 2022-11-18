@@ -1,18 +1,19 @@
 package com.sundogsoftware.spark.Section4
 
-import breeze.linalg.sum
-import breeze.numerics.round
-import org.apache.log4j.{Level, Logger}
+import org.apache.log4j._
 import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types.{DoubleType, IntegerType, StructType}
+
 
 /** Compute the total amount spent per customer in some fake e-commerce data. */
 object TotalSpentByCustomerDataset {
 
-  case class CustomerOrders(cust_id: Int, item_id: Int, amount_spent: Double)
 
   /** Our main function where the action happens */
   def main(args: Array[String]) {
+
+    case class CustomerOrders(cust_id: Int, item_id: Int, amount_spent: Double)
 
     // Set the log level to only print errors
     Logger.getLogger("org").setLevel(Level.ERROR)

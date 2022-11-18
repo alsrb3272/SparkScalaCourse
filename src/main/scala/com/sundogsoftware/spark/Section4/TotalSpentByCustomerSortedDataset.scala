@@ -1,6 +1,9 @@
 package com.sundogsoftware.spark.Section4
 
-import org.apache.spark.sql.functions.{round, sum}
+import org.apache.log4j._
+import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.types.{DoubleType, IntegerType, StructType}
+import org.apache.spark.sql.functions._
 
 /** Compute the total amount spent per customer in some fake e-commerce data. */
 object TotalSpentByCustomerSortedDataset {

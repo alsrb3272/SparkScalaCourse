@@ -1,5 +1,9 @@
 package com.sundogsoftware.spark.Section4
 
+import org.apache.log4j._
+import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.functions._
+
 /** Count up how many of each word appears in a book as simply as possible. */
 object WordCountDataset {
 
