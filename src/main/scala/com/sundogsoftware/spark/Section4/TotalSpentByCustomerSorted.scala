@@ -1,8 +1,7 @@
-package com.sundogsoftware.spark.Section3
+package com.sundogsoftware.spark.Section4
 
-
-import org.apache.log4j._
-import org.apache.spark._
+import org.apache.log4j.{Level, Logger}
+import org.apache.spark.SparkContext
 
 /** Compute the total amount spent per customer in some fake e-commerce data. */
 object TotalSpentByCustomerSorted {
