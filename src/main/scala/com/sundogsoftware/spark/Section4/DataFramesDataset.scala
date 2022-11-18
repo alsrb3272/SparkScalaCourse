@@ -5,6 +5,7 @@ import org.apache.spark.sql.SparkSession
 
 object DataFramesDataset {
 
+  // 클래스 id, name, age, friends로 구성
   case class Person(id: Int, name: String, age: Int, friends: Int)
 
   /** Our main function where the action happens */
@@ -36,15 +37,19 @@ object DataFramesDataset {
     println("Here is our inferred schema:")
     people.printSchema()
 
+    // name 조회
     println("Let's select the name column:")
     people.select("name").show()
 
+    // 21살 아래로 조회
     println("Filter out anyone over 21:")
     people.filter(people("age") < 21).show()
 
+    // 나이별로 count해서 조회
     println("Group by age:")
     people.groupBy("age").count().show()
 
+    // name, 나이에 +10한 결과
     println("Make everyone 10 years older:")
     people.select(people("name"), people("age") + 10).show()
 

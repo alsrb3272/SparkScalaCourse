@@ -28,14 +28,19 @@ object WordCountBetterSortedDataset {
     val input = spark.read.text("data/book.txt").as[Book]
 
     // Split using a regular expression that extracts words
+    // 텍스트를 한열에 저장하는 방식.
+    // 모든단어가 자체 행에 있는 단어 열이 있는 새 dataset에 있어야함
+
     val words = input
       .select(explode(split($"value", "\\W+")).alias("word"))
       .filter($"word" =!= "")
 
     // Normalize everything to lowercase
+    // 소문자로 변경
     val lowercaseWords = words.select(lower($"word").alias("word"))
 
     // Count up the occurrences of each word
+    // 고유한 단어들을 그룹화
     val wordCounts = lowercaseWords.groupBy("word").count()
 
     // Sort by counts
@@ -46,8 +51,11 @@ object WordCountBetterSortedDataset {
 
 
     // ANOTHER WAY TO DO IT (Blending RDD's and Datasets)
+    // 대체 접근 방식.
     val bookRDD = spark.sparkContext.textFile("data/book.txt")
+    //
     val wordsRDD = bookRDD.flatMap(x => x.split("\\W+"))
+    // RDD를 Dataset으로 변경
     val wordsDS = wordsRDD.toDS()
 
     val lowercaseWordsDS = wordsDS.select(lower($"value").alias("word"))

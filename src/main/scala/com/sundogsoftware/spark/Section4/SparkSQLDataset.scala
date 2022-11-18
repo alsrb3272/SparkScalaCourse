@@ -29,12 +29,15 @@ object SparkSQLDataset {
       .option("header", "true")
       .option("inferSchema", "true")
       .csv("data/fakefriends.csv")
+    // 더 나은 컴파일과 파일 오류를 활용할 수 있는 방법
       .as[Person]
 
     schemaPeople.printSchema()
 
+    // People로 구성
     schemaPeople.createOrReplaceTempView("people")
 
+    // SQL 쿼리문으로 나이 13~19세 조회하기
     val teenagers = spark.sql("SELECT * FROM people WHERE age >= 13 AND age <= 19")
 
     val results = teenagers.collect()
