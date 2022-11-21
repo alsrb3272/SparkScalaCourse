@@ -1,4 +1,4 @@
-package com.sundogsoftware.spark.Section4
+package com.sundogsoftware.spark.Section3
 
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.SparkContext
