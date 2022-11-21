@@ -1,19 +1,20 @@
-package com.sundogsoftware.spark
+package com.sundogsoftware.spark.Section5
 
-import org.apache.log4j._
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.functions._
+import org.apache.spark.sql.functions.{col, size, split, sum}
 import org.apache.spark.sql.types.{IntegerType, StringType, StructType}
 
 /** Find the superhero with the most co-appearances. */
 object MostPopularSuperheroDataset {
 
   case class SuperHeroNames(id: Int, name: String)
+
   case class SuperHero(value: String)
- 
+
   /** Our main function where the action happens */
   def main(args: Array[String]) {
-   
+
     // Set the log level to only print errors
     Logger.getLogger("org").setLevel(Level.ERROR)
 
@@ -47,8 +48,8 @@ object MostPopularSuperheroDataset {
       .groupBy("id").agg(sum("connections").alias("connections"))
 
     val mostPopular = connections
-        .sort($"connections".desc)
-        .first()
+      .sort($"connections".desc)
+      .first()
 
     val mostPopularName = names
       .filter($"id" === mostPopular(0))

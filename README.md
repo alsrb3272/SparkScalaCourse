@@ -3,7 +3,7 @@
 
 Learning Spark (개인 Study)
 
-### 🔹 RDD
+### 🔹 RDD(Resilient Distributed Dataset)
 - RDD는 Resilient Distributed Dataset 의 줄임말로 스파크의 기본 데이터 구조이다. 
 - 분산 변경 불가능한 객체 모음이며 스파크의 모든 작업은 새로운 RDD를 만들거나 존재하는 RDD를 변형하거나 결과 계산을 위해 RDD에서 연산하는 것을 표현하고 있다. 
 - 스파크는 빠른 map reduce 작업을 RDD 개념을 이용해 사용한다고 한다.
@@ -24,7 +24,7 @@ Learning Spark (개인 Study)
   - 메모리 용량보다 큰 데이터를 처리 할 때는 처리 이외의 메모리 내 데이터 교체라던가, 작업 과정 저장, 컨텍스트 스위칭 등과 같은 류의 과부하가 걸릴 수도 있음.
 
 
-### 🔹 SECTION4. SPARK SQL
+### 🔹 SECTION4. SPARK SQL, DataFrames 및 DataSets
 - 데이터 프레임
   - 관계성 데이터베이스
   - 스키마를 가지고 효율적인 저장
@@ -63,3 +63,8 @@ Learning Spark (개인 Study)
 - 사용자 정의함수(USER-DEFINED FUNCTIONS(UDF'S))
   - import org.apache.spark.sql.functions.udf
   - 내가 만든 함수를 호출해서 사용
+
+### 🔹 SECTION5. 스파크 프로그램의 고급 사례
+  
+- Hive
+  - 
