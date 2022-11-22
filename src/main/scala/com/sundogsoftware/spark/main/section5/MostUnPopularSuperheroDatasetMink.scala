@@ -6,15 +6,12 @@ import org.apache.spark.sql.functions.{col, min, size, split, sum}
 import org.apache.spark.sql.types.{IntegerType, StringType, StructType}
 
 
-// List the names of all superheroes with only ONE connection
-// Extra credit : compute the actual smallest number of connections in the data set instead of assuming it is one
-
-// Strategy
-// Start with a copy of the MostPopularSuperheroDataset script (can copy/ paste in Intellij and give it a new name in the process)
-// Can be largely unchanged up to point where the "connections" dataset is constructed
-// Filter the connections to find rows with only one connection
-// Join the results with the names dataset
-// Select the names column and show it
+// 코드풀이 방식
+// MostPopularSuperheroDataset 스크립트의 복사본으로 시작합니다(Intellij에서 복사/붙여넣기 및 프로세스에서 새 이름을 지정할 수 있음).
+// "connections" 데이터 세트가 구성되는 지점까지 크게 변경되지 않을 수 있습니다.
+// 연결이 하나뿐인 행을 찾기 위해 연결 필터링
+// 결과를 이름 데이터 세트와 결합
+// 이름 열을 선택하고 표시
 
 // Syntax Snippets 힌트
 // Datasetname.filter(%"columnname" === somevalue)
@@ -23,7 +20,7 @@ import org.apache.spark.sql.types.{IntegerType, StringType, StructType}
 
 
 /** Find the superhero with the most co-appearances. */
-object MostObscureSuperheroDatasetMink {
+object MostUnPopularSuperheroDatasetMink {
 
   case class SuperHeroNames(id: Int, name: String)
 
@@ -38,7 +35,7 @@ object MostObscureSuperheroDatasetMink {
     // Create a SparkSession using every core of the local machine
     val spark = SparkSession
       .builder
-      .appName("MostObscureHero")
+      .appName("UnPopularSuperhero")
       .master("local[*]")
       .getOrCreate()
 
@@ -63,17 +60,18 @@ object MostObscureSuperheroDatasetMink {
       .withColumn("id", split(col("value"), " ")(0))
       .withColumn("connections", size(split(col("value"), " ")) - 1)
       .groupBy("id").agg(sum("connections").alias("connections"))
+//--------------------여기까진 동일 ------------------------------------------------------------
 
-    val minConnectionCount = connections.agg(min("connections")).first().getLong(0)
-
-    val minConnections = connections.filter($"connections" === minConnectionCount)
-
-    val minConnectionsWithNames = minConnections.join(names, usingColumn = "id")
-
-    println("The following characters hava only" + minConnectionCount + " connection(s):")
-
-    minConnectionsWithNames.select("name").show()
-
-
+    // Datasetname.filter($"columnname" === somevalue)
+    // Datasetname.join(someOtherDatasetWithACommonColumnName, usingColumn="commonColumnName")
+    // agg(min("columnName")).first().getLong(0)
+    // 커넥션 칼럼에 있는 연결점 최솟값들 데이터들을 불러온 후 first를 통해 싱글 row로 전환하고 row 객체를 갖게되면 긴 정수로 표출
+    val a = connections.agg(min("connections")).first().getLong(0)
+    // id값들로 필터링하여 추출.
+    val ab = connections.filter($"connections" === a)
+    // id들을 통하여 names로 조인
+    val abc = ab.join(names, usingColumn = "id");
+    // 이름열 선택
+    abc.select("name").show()
   }
 }

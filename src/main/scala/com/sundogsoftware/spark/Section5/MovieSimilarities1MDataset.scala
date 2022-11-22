@@ -1,20 +1,18 @@
-package com.sundogsoftware.spark
+package com.sundogsoftware.spark.Section5
 
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.functions._
-import org.apache.log4j._
-import org.apache.spark.sql.{Dataset, SparkSession}
 import org.apache.spark.sql.types.{IntegerType, LongType, StringType, StructType}
-
-// To run on EMR successfully + output results for Star Wars:
-// aws s3 cp s3://sundog-spark/MovieSimilarities1MDataset.jar ./
-// aws s3 cp s3://sundog-spark/ml-1m/movies.dat ./
-// spark-submit --executor-memory 1g MovieSimilarities1MDataset.jar 260
+import org.apache.spark.sql.{Dataset, SparkSession}
 
 object MovieSimilarities1MDataset {
 
   case class Movies(userID: Int, movieID: Int, rating: Int, timestamp: Long)
+
   case class MoviesNames(movieID: Int, movieTitle: String)
+
   case class MoviePairs(movie1: Int, movie2: Int, rating1: Int, rating2: Int)
+
   case class MoviePairsSimilarity(movie1: Int, movie2: Int, score: Double, numPairs: Long)
 
   def computeCosineSimilarity(spark: SparkSession, data: Dataset[MoviePairs]): Dataset[MoviePairsSimilarity] = {
@@ -51,6 +49,7 @@ object MovieSimilarities1MDataset {
 
     result(0).toString
   }
+
   /** Our main function where the action happens */
   def main(args: Array[String]) {
 
